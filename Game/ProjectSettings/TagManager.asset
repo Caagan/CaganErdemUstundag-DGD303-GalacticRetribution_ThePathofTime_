@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SpaceShip
+  - EnemyRed
   layers:
   - Default
   - TransparentFX
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: SpaceshipLayer
     uniqueID: 3397334621
+    locked: 0
+  - name: ui
+    uniqueID: 1319611331
     locked: 0
