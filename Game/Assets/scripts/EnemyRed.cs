@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyShipScript : MonoBehaviour
 {
+    public int enemyhealth=100;
     public float speed = 0.6f;  // Düþman gemisinin hýzýný belirler
     public float rotationSpeed = 3f;  // Dönme hýzý
     public GameObject projectilePrefab;  // Mermi prefab'ý
@@ -45,7 +47,7 @@ public class EnemyShipScript : MonoBehaviour
     void FireAtPlayer()
     {
         // Düþman gemisinin ateþ etme sýklýðýný belirlemek için
-        if (Random.Range(0f, 1f) < 0.01f)  // %1 ihtimalle ateþ etme
+        if (Random.Range(0f, 1f) < 0.005f)  // %1 ihtimalle ateþ etme
         {
             Shoot();
         }
@@ -68,5 +70,26 @@ public class EnemyShipScript : MonoBehaviour
             // Mermiyi oyuncuya doðru yönlendiriyoruz
             rb.velocity = direction * 10f;  // Hýz 10f olarak ayarlanabilir
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.tag == "Bullet")
+        {
+            if (enemyhealth < 1)
+            {
+                //öl
+                Die();
+            }
+            else
+            {
+                enemyhealth = enemyhealth - 10;
+               
+            }
+        }
+    }
+    public void Die()
+    {
+        Destroy(gameObject, 1f);
     }
 }

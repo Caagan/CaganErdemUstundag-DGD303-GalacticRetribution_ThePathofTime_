@@ -1,16 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceShipScript : MonoBehaviour
 
 {
     Rigidbody2D rb;
     public float speed;
+    public int health = 100;
 
     public float rotationSpeed = 5f;  // Döndürme hýzý
     public GameObject projectilePrefab;  // Mermi prefab'ý
     public Transform shootPoint;  // Merminin ateþ edileceði nokta
+
+    
+    public  Image progressbarui;
+    public GameObject gameover;
 
 
     void Awake()
@@ -61,6 +67,26 @@ public class SpaceShipScript : MonoBehaviour
             // Mermiyi geminin baktýðý yönde hareket ettiriyoruz
             rb.velocity = transform.up * 10f;  // Geminin "yukarý" yönü (forward yönü) ile hareket eder
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyRedBullet")
+        {
+            if (health < 1)
+            {
+                //öl
+                Death();
+            }
+            else
+            {
+                health = health - 5;
+                progressbarui.fillAmount =progressbarui.fillAmount-0.05f;
+            }
+        }
+    }
+    public void Death()
+    {
+        gameover.SetActive(true);
     }
 }
 
