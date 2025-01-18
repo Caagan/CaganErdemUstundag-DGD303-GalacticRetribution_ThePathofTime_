@@ -51,6 +51,9 @@ TagManager:
   - name: EffectLayer
     uniqueID: 52395447
     locked: 0
+  - name: DropLayer
+    uniqueID: 2593770439
+    locked: 0
   - name: SpaceshipLayer
     uniqueID: 3397334621
     locked: 0

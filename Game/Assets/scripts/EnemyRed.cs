@@ -13,11 +13,13 @@ public class EnemyShipScript : MonoBehaviour
 
     private Transform player;  // Oyuncu (spaceship) referansý
     private Rigidbody2D rb;
+    private Animator ani;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("SpaceShip").transform;  // Oyuncu gemisini bul
+        ani = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -84,6 +86,7 @@ public class EnemyShipScript : MonoBehaviour
             else
             {
                 enemyhealth = enemyhealth - 10;
+                ani.SetTrigger("redHit");
                
             }
         }
