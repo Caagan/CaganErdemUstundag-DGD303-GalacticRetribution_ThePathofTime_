@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Bullet : MonoBehaviour
 {
     // Start is called before the first frame update
+
+   
     void Start()
     {
         // Merminin belirli bir süre sonra yok olmasýný saðla
@@ -16,6 +19,7 @@ public class Bullet : MonoBehaviour
         // Eðer mermi bir objeye çarparsa yok olsun
         Destroy(gameObject);
     }
+
 }
 
    

@@ -8,6 +8,11 @@ TagManager:
   - EnemyRed
   - EnemyRedBullet
   - Bullet
+  - SceneManager
+  - Ultimate
+  - partDrop
+  - MinionBullet
+  - meteorite
   layers:
   - Default
   - TransparentFX

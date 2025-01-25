@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8355160700390758044}
   - component: {fileID: 1675364518942387784}
   - component: {fileID: 8760552239048113391}
+  - component: {fileID: 5907045522433728176}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: EnemyRedBullet
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -897632675
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d0835ae98d6444342aa0b9b4b9b487b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,3 +149,15 @@ CircleCollider2D:
   m_Offset: {x: 0.002625593, y: 0.000064319094}
   serializedVersion: 2
   m_Radius: 0.99380183
+--- !u!114 &5907045522433728176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8419770375830262411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc2a4e2cc39dd644bd9d43b8a819b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

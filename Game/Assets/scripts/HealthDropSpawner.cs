@@ -21,5 +21,6 @@ public class HealthDropSpawner : MonoBehaviour
 
         // Saðlýk objesini spawn et
         Instantiate(healthDropPrefab, spawnPos, Quaternion.identity);
+        //Destroy(gameObject,5f);
     }
 }

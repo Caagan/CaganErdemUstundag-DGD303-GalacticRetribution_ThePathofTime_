@@ -5,16 +5,32 @@ using UnityEngine.UIElements;
 
 public class EnemyShipScript : MonoBehaviour
 {
+
+    // I got help from ChatGPT for codes!!!!!!!!!
     public int enemyhealth=100;
     public float speed = 0.6f;  // Düþman gemisinin hýzýný belirler
     public float rotationSpeed = 3f;  // Dönme hýzý
     public GameObject projectilePrefab;  // Mermi prefab'ý
+    public GameObject explosionPrefab;
+    public GameObject partDropPrefab;
     public Transform shootPoint;  // Merminin ateþ edileceði nokta
 
     private Transform player;  // Oyuncu (spaceship) referansý
     private Rigidbody2D rb;
     private Animator ani;
+    bool drop=false;
+    public GameObject parttext;
 
+    private ScoreSystem scoreSystem;
+    private void Start()
+    {
+        GameObject sceneManagerObj = GameObject.FindGameObjectWithTag("SceneManager");
+        if (sceneManagerObj != null)
+        {
+            scoreSystem = sceneManagerObj.GetComponent<ScoreSystem>();
+        }
+
+    }
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -25,11 +41,14 @@ public class EnemyShipScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Oyuncuya doðru hareket etme
-        MoveTowardsPlayer();
+        if (SpaceShipScript.isAlive)
+        {
+            // Oyuncuya doðru hareket etme
+            MoveTowardsPlayer();
 
-        // Oyuncuya doðru ateþ etme
-        FireAtPlayer();
+            // Oyuncuya doðru ateþ etme
+            FireAtPlayer();
+        }
     }
 
     void MoveTowardsPlayer()
@@ -37,13 +56,25 @@ public class EnemyShipScript : MonoBehaviour
         // Oyuncu ile düþman arasýndaki mesafeyi hesapla
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // Düþman gemisini oyuncuya doðru hareket ettir
+        // Gemiyi hedefe doðru hareket ettirme
         rb.velocity = direction * speed;
 
-        // Düþman gemisinin oyuncuya doðru dönmesi için
+        // Dönüþ açýsýný hesapla
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // Eðer sprite'ýn "sað" yerine "yukarý" yönde çizilmiþse (top-down gemi gibi),
+        // -90f ekleyerek düzeltme yapabilirsiniz:
+        angle -= 270f;
+
+        // Hedef rotasyonu oluþtur
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        // Yumuþak bir dönüþ için Slerp veya RotateTowards kullanabilirsiniz
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 
     void FireAtPlayer()
@@ -87,12 +118,40 @@ public class EnemyShipScript : MonoBehaviour
             {
                 enemyhealth = enemyhealth - 10;
                 ani.SetTrigger("redHit");
+                scoreSystem.IncreaseScore(20);
                
+            }
+        }
+        if(collision.tag == "Ultimate")
+        {
+            if (enemyhealth < 1)
+            {
+                //öl
+                Die();
+                
+            }
+            else
+            {
+                enemyhealth = enemyhealth - 20;
+                ani.SetTrigger("redHit");
+                scoreSystem.IncreaseScore(40);
+
             }
         }
     }
     public void Die()
     {
-        Destroy(gameObject, 1f);
+        if (!drop)
+        {
+            Instantiate(partDropPrefab, transform.position, transform.rotation);
+            drop = true;
+             parttext.SetActive(true);
+        }
+        
+        SoundManager.Instance.PlaySFX(SoundManager.Instance.explosionSound);
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        
+        Destroy(gameObject, 0.5f);
     }
+   
 }
