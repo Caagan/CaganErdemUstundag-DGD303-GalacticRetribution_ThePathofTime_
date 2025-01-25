@@ -1,6 +1,11 @@
 # CaganErdemUstundag-DGD303-GalacticRetribution-_ThePathofTime_
 Çağan Erdem Üstündağ_229913183_This repo will include "DGD303 Game Engines 2" project files
 
+
+- BUILD LINK: https://drive.google.com/drive/folders/1O1QXNX6nlAeukfnJHX1NWT6Od2EQyaGp?usp=sharing
+- PLEASE RUN THE GAME TROUGHT THE MAIN MENU SCENE
+
+- 
    How to Play?
 
 - You can avoid bullets by steering the spaceship with the w-a-s-d keys.
