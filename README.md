@@ -3,6 +3,7 @@
 
 
 - BUILD LINK: https://drive.google.com/drive/folders/1O1QXNX6nlAeukfnJHX1NWT6Od2EQyaGp?usp=sharing
+- BUILD LINK2: https://disk.yandex.com.tr/i/vo6idC6LHhT_EA
 - PLEASE RUN THE GAME TROUGHT THE MAIN MENU SCENE
 
 - 
